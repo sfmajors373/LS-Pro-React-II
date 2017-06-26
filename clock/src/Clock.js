@@ -10,15 +10,15 @@ export default class Clock extends Component{
 		};
 	}
 	//One way to do it using life cycle
-	//componentDidMount(){
-	//	this.intervalID = setInterval(
-	//		() => this.incrementClock(),
-	//		1000
-	//	);
-	//}
-	//componentWillUnmount(){
-	//	clearInterval(this.intervalID);
-	//}
+	componentDidMount(){
+		this.intervalID = setInterval(
+			() => this.incrementClock(),
+			1000
+		);
+	}
+	componentWillUnmount(){
+		clearInterval(this.intervalID);
+	}
 
 	//Another way to do it using just callback funcitons
 	//setInterval(() => {
@@ -26,24 +26,23 @@ export default class Clock extends Component{
 	//		return {
 	//			time: oldState + 1
 	//		}
-	//	});
-
-	//), 1000);
+	//	};
+	//), 1000});
 
 	//Third way combines life cycle and call back
-	componentWillUnmount(){
-		this.initializeInterval();
-	}
+	//componentWillUnmount(){
+	//	this.initializeInterval();
+	//}
 
-	initializeInterval(){
-		setInterval(() => {
-			this.setState((oldState) => {
-				return{
-					time: oldState.count + 1
-				};
-			});
-		}, 1000); 
-	}
+	//initializeInterval(){
+	//	setInterval(() => {
+	//		this.setState((oldState) => {
+	//			return{
+	//				time: oldState.count + 1
+	//			};
+	//		});
+	//	}, 1000); 
+	//}
 
 	incrementClock(){
 		this.setState({
