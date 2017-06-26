@@ -9,14 +9,40 @@ export default class Clock extends Component{
 			time: new Date().toLocaleString()
 		};
 	}
-	componentDidMount(){
-		this.intervalID = setInterval(
-			() => this.incrementClock(),
-			1000
-		);
-	}
+	//One way to do it using life cycle
+	//componentDidMount(){
+	//	this.intervalID = setInterval(
+	//		() => this.incrementClock(),
+	//		1000
+	//	);
+	//}
+	//componentWillUnmount(){
+	//	clearInterval(this.intervalID);
+	//}
+
+	//Another way to do it using just callback funcitons
+	//setInterval(() => {
+	//	this.setState((oldState) => {
+	//		return {
+	//			time: oldState + 1
+	//		}
+	//	});
+
+	//), 1000);
+
+	//Third way combines life cycle and call back
 	componentWillUnmount(){
-		clearInterval(this.intervalID);
+		this.initializeInterval();
+	}
+
+	initializeInterval(){
+		setInterval(() => {
+			this.setState((oldState) => {
+				return{
+					time: oldState.count + 1
+				};
+			});
+		}, 1000); 
 	}
 
 	incrementClock(){
